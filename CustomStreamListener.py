@@ -17,7 +17,7 @@ OAUTH_TOKEN_SECRET = 'gdlNcRgabLjSPw0cMS6gz4kYe8oN8v2ySkEjCKAvHApVG'
 json = import_simplejson()
 
 
-#assword = urllib.quote_plus('admin@123')
+
 MONGODB_URI ='mongodb://trinq:admin%40123@ds041992.mongolab.com:41992/adyoutube' 
 
 class StdOutListener(StreamListener):
