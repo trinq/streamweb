@@ -34,7 +34,7 @@ def save_data_mongo(SEED_DATA):
     # First we'll add a few songs. Nothing is required to create the songs 
     # collection; it is created automatically when we insert.
 
-    songs = db['addyoutube']
+    songs = db['addcollection']
 
     # Note that the insert method can take either an array or a single dict.
 
