@@ -20,7 +20,7 @@ import pymongo
 ### Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
 
 # ='mongodb://trinq:admin%40123@ds041992.mongolab.com:41992/adyoutube' 
-MONGODB_URI = 'mongodb://127.0.0.1.27017/adyoutube'
+MONGODB_URI = 'mongodb://127.0.0.1:27017/adyoutube'
 ###############################################################################
 # main
 ###############################################################################
