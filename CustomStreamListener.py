@@ -18,7 +18,6 @@ json = import_simplejson()
 
 
 
-MONGODB_URI ='mongodb://trinq:admin%40123@ds041992.mongolab.com:41992/adyoutube' 
 
 class StdOutListener(StreamListener):
     
@@ -26,6 +25,7 @@ class StdOutListener(StreamListener):
     
     def error():
         print "hello"
+    
     def on_data(self,data):
         
 	    SEED_DATA = json.loads(data)
