@@ -20,16 +20,16 @@ import pymongo
 ### Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
 
 # ='mongodb://trinq:admin%40123@ds041992.mongolab.com:41992/adyoutube' 
-MONGODB_URI = 'mongodb://127.0.0.1:27017/adyoutube'
+#MONGODB_URI = 'mongodb://127.0.0.1:27017/adyoutube'
+MONGODB_URI = 'mongodb://trinq:admin%40123@ds041992.mongolab.com:41992/adyoutube'
 ###############################################################################
 # main
 ###############################################################################
+client = pymongo.MongoClient(MONGODB_URI)
+db = client.get_default_database()
 
 def save_data_mongo(SEED_DATA):
 
-    client = pymongo.MongoClient(MONGODB_URI)
-
-    db = client.get_default_database()
     
     # First we'll add a few songs. Nothing is required to create the songs 
     # collection; it is created automatically when we insert.

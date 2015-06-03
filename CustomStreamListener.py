@@ -1,12 +1,12 @@
 import tweepy
+import pymongo
 from login_twitter import login
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from mongodbconnect import save_data_mongo
-import pymongo
 from tweepy.utils import import_simplejson
-
+from keyword_db import getkeyword
 
 
 
@@ -23,14 +23,18 @@ class StdOutListener(StreamListener):
     
     json = import_simplejson()
     
-    def error():
-        print "hello"
+    def error(self,staus):
+        print status
+        return True
     
     def on_data(self,data):
-        
 	    SEED_DATA = json.loads(data)
 	    save_data_mongo(SEED_DATA)
 	    print SEED_DATA
+	    return True
+	    
+    def on_timeout(self):
+	    print sys.stderr, 'Timeout...'
 	    return True
 	    
 if __name__== '__main__':
@@ -39,5 +43,10 @@ if __name__== '__main__':
     auth = login()
     twitter_api = tweepy.API(auth)
     stream = Stream(auth,l)
-    stream.filter(track=['python','javascript','ruby'])
+    #stream.filter(track=['python','javascript','ruby'])
+    kw = getkeyword()
+    print kw
+   # stream.disconnect()
+    
+    
 
