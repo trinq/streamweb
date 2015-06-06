@@ -6,7 +6,7 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 from mongodbconnect import save_data_mongo
 from tweepy.utils import import_simplejson
-from keyword_db import getkeyword
+from keyword_db import getnewkeyword
 
 
 
@@ -24,13 +24,17 @@ class StdOutListener(StreamListener):
     json = import_simplejson()
     
     def error(self,staus):
-        print status
+        print('Got an error with status code: ' + str(staus))
         return True
     
     def on_data(self,data):
 	    SEED_DATA = json.loads(data)
 	    save_data_mongo(SEED_DATA)
-	    print SEED_DATA
+	    print '%s' % (SEED_DATA['text'].encode('utf-8').strip())
+	    print ''
+	    print SEED_DATA['user']['screen_name']
+	    #print ,SEED_DATA['text'].encode('utf-8').strip())
+	 
 	    return True
 	    
     def on_timeout(self):
@@ -43,9 +47,10 @@ if __name__== '__main__':
     auth = login()
     twitter_api = tweepy.API(auth)
     stream = Stream(auth,l)
-    #stream.filter(track=['python','javascript','ruby'])
-    kw = getkeyword()
+    #stream.filter(track=[a])
+    kw = getnewkeyword()
     print kw
+    stream.filter(track=[kw])
    # stream.disconnect()
     
     
