@@ -1,5 +1,6 @@
 import tweepy
 import pymongo
+import time
 from login_twitter import login
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
@@ -46,11 +47,18 @@ if __name__== '__main__':
     l = StdOutListener()
     auth = login()
     twitter_api = tweepy.API(auth)
-    stream = Stream(auth,l)
-    #stream.filter(track=[a])
-    kw = getnewkeyword()
-    print kw
-    stream.filter(track=[kw])
+    twitterStream = Stream(auth,l)
+    while True:
+        if twitterStream.running is True:
+            twitterStream.disconnect()
+        kw = getnewkeyword()
+        print kw
+        if kw =='':
+            print 'no keywords to listen to'
+        else:
+            twitterStream.filter(track=[kw],async=True)
+    
+        time.sleep(60)
    # stream.disconnect()
     
     
